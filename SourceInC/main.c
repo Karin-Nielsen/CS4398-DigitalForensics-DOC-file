@@ -11,9 +11,13 @@
                 Close disks. 
 */
 
+
 /* Include statements */
-#include <stdio.h>
-#include <stdlib.h> 
+#include <stdio.h>      // printf(), fprintf()
+#include <fcntl.h>      // open() 
+#include <unistd.h>     // close()
+#include "functions.h"
+//#include "structs.h"
 
 
 /* Function(s) */
@@ -23,7 +27,14 @@ int main(int argc, char** argv) {
 
         /* Define variables */
         int fd; 
-  
+
+
+        /* Error handling */
+        /* Check for 2 arguments and opened partition successfully */
+        if(argc != 2) {
+           fprintf(stderr, "(0)USAGE: %d arg count: \n", argc);
+           return(0);
+        }
   
         /* Open and write only */
         printf("Opening read disk...\n");
@@ -32,15 +43,18 @@ int main(int argc, char** argv) {
             fprintf(stderr, "device not opened = %s. Exiting program. \n", argv[1] );
             return(0);
         }
-        
-        printf("Read disk opened successfully!\n\n");
-  
-        printf("Calling readClusters()\n");
-  
-  
-  
- /* ---------------- Close disks and end program ---------------- */
 
+        fprintf(stdout, "Read disk opened successfully!\n\n");
+  
+
+        fprintf(stdout, "Calling readClusters()\n");
+        readClusters(fd);
+  
+  
+ /* ---------------- Close disk(s) and end program ---------------- */
+
+        fprintf(stdout,"\n---------------------------------------\n\n");
+        fprintf(stdout, "Closing disk and exiting program.\n\n");
         close(fd);
   
 }

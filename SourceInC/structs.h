@@ -9,6 +9,9 @@
 */
 
 
-typedef struct entire_cluster {
+/* Include statements */
+#include <linux/types.h>    // __u8
+
+struct entire_cluster {
    __u8 cluster[4096]; 
-} ENTIRE_cluster;
+};
